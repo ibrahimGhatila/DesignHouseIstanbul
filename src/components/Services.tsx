@@ -8,41 +8,41 @@ import DotPoster from "./DotPoster";
 const SERVICES = [
   {
     n: "1",
-    title: "Design",
-    body: "We partner with brands to create design systems that scale. Our work spans art direction, responsive web design, and visual content that communicates what words can't.",
-    count: 99,
+    title: "Portfolio",
+    body: "We help you build a body of work with a clear creative voice. From idea to final artwork, we shape projects that show range, intent, and craft — the things admissions panels actually look for.",
+    count: 96,
     suffix: "%",
     poster: {
       color: "red" as const,
       shape: "circles" as const,
       label: "Istanbul, TR",
-      caption: "99% of our clients need this",
+      caption: "96% acceptance to first-choice schools",
     },
   },
   {
     n: "2",
-    title: "Engineering",
-    body: "We build websites that empower founders and marketers to react quickly, test concepts, and measure results. From enterprise platforms to clean, modern low-code systems — we sweat the build.",
-    count: 590,
+    title: "Mentorship",
+    body: "One-on-one guidance from practicing artists and designers. We meet you where you are, push your thinking, and keep you accountable through every critique, draft, and deadline.",
+    count: 900,
     suffix: "+",
     poster: {
       color: "ink" as const,
       shape: "cube" as const,
-      label: "London, UK",
-      caption: "590 sites we've birthed",
+      label: "Studio sessions",
+      caption: "900+ students mentored",
     },
   },
   {
     n: "3",
-    title: "Strategy",
-    body: "Our approach to strategy is precise, efficient, and grounded in expertise — from competitive landscape to SEO and conversion. We move fast and skip the endless conceptual detours.",
-    count: 2,
-    suffix: "B",
+    title: "Admissions",
+    body: "Strategy that gets you in. We map school fit, deadlines, interviews, and statements — the full path to the world's best art & design programs, minus the guesswork.",
+    count: 40,
+    suffix: "+",
     poster: {
       color: "mint" as const,
       shape: "hexagons" as const,
-      label: "You read this?",
-      caption: "pages wireframed (it feels that way)",
+      label: "Worldwide",
+      caption: "40+ partner schools placed into",
     },
   },
 ];
@@ -93,7 +93,7 @@ export default function Services() {
         ( So, what do we do exactly? )
       </p>
       <h2 className="services-head max-w-[16ch] font-display text-[11vw] font-extrabold uppercase leading-[0.88] tracking-tight md:text-[6.5vw]">
-        We make brands impossible to ignore
+        We make portfolios impossible to ignore
       </h2>
 
       <div className="mt-24 flex flex-col gap-28 md:gap-40">

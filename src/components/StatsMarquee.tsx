@@ -3,16 +3,16 @@
 import Marquee from "./Marquee";
 
 const TILES = [
-  ["15+", "Years"],
-  ["480", "Projects"],
+  ["12+", "Years"],
+  ["900+", "Students"],
   ["(212)", "Istanbul"],
-  ["0", "Scrubs"],
-  ["6", "Countries"],
+  ["40+", "Schools"],
+  ["96%", "Accepted"],
+  ["6", "Continents"],
   ["3", "Dogs"],
-  ["17", "Awards"],
-  ["ZERO", "Reptilians"],
-  ["(207)", "London"],
-  ["2", "Brothers"],
+  ["ZERO", "Cookie-cutters"],
+  ["18", "Disciplines"],
+  ["∞", "Late Nights"],
 ];
 
 export default function StatsMarquee() {

@@ -3,43 +3,38 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
+import { IMAGES } from "@/lib/images";
 
 const PROJECTS = [
   {
-    name: "Bosphorus",
-    desc: "Unified branding and website for a waterfront hospitality group",
-    from: "#ff3b2f",
-    to: "#7a1208",
+    name: "Spatial Design",
+    desc: "Architecture & interior portfolios built for top-school admissions",
+    img: IMAGES.spatial,
   },
   {
-    name: "Meridian",
-    desc: "Product-grade design system for a leading fintech platform",
-    from: "#9589d3",
-    to: "#2b2350",
+    name: "Visual Communication",
+    desc: "Graphic design & typography with a point of view",
+    img: IMAGES.visual,
   },
   {
-    name: "Lale Wellness",
-    desc: "Playful web experience for a modern longevity practice",
-    from: "#6dc9bc",
-    to: "#0f3d37",
+    name: "Fine Arts",
+    desc: "A studio practice and a body of work that stands out",
+    img: IMAGES.fineArt,
   },
   {
-    name: "Atlas Energy",
-    desc: "Interactive corporate site for a renewables pioneer",
-    from: "#0a0a0a",
-    to: "#333333",
+    name: "Industrial Design",
+    desc: "Product & object design, from sketch to prototype",
+    img: IMAGES.industrial,
   },
   {
-    name: "Form Studio",
-    desc: "Editorial portfolio for an award-winning architecture firm",
-    from: "#e8b400",
-    to: "#5a4500",
+    name: "Fashion & Textile",
+    desc: "Concept-driven collections and fashion portfolios",
+    img: IMAGES.fashion,
   },
   {
-    name: "Kapalı",
-    desc: "E-commerce experience for a heritage retail house",
-    from: "#ff6f91",
-    to: "#5a1a2c",
+    name: "Photography & Film",
+    desc: "Visual storytelling through the lens",
+    img: IMAGES.photography,
   },
 ];
 
@@ -66,13 +61,13 @@ export default function Projects() {
     <section ref={root} className="bg-paper px-5 py-20 text-ink md:px-10 md:py-28">
       <div className="mb-12 flex items-end justify-between">
         <h2 className="font-display text-3xl font-extrabold uppercase tracking-tight md:text-5xl">
-          Selected Projects
+          Disciplines
         </h2>
         <a
           href="#"
           className="font-mono text-xs uppercase tracking-[0.15em] underline hover:opacity-60"
         >
-          View all projects →
+          View student work →
         </a>
       </div>
 
@@ -85,15 +80,15 @@ export default function Projects() {
               i % 3 === 0 ? "md:col-span-2" : ""
             }`}
           >
-            <div className="relative aspect-[16/10] w-full overflow-hidden">
-              <div
-                className="absolute inset-0 scale-100 transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${p.from}, ${p.to})`,
-                }}
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.img}
+                alt={p.name}
+                className="absolute inset-0 h-full w-full scale-100 object-cover transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-[radial-gradient(#ffffff14_1px,transparent_1.5px)] [background-size:18px_18px]" />
-              <span className="absolute bottom-5 left-5 font-display text-4xl font-extrabold uppercase tracking-tight text-white md:text-6xl">
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
+              <span className="absolute bottom-5 left-5 font-display text-4xl font-extrabold uppercase tracking-tight text-white drop-shadow-lg md:text-6xl">
                 {p.name}
               </span>
               <span className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center bg-white/0 text-white opacity-0 transition-all duration-500 group-hover:bg-white group-hover:text-ink group-hover:opacity-100">

@@ -3,12 +3,13 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, SplitText, registerGsap } from "@/lib/gsap";
+import { IMAGES } from "@/lib/images";
 
 const STATS = [
-  ["15+", "years"],
-  ["480+", "projects"],
-  ["3", "continents"],
-  ["0", "boring briefs"],
+  ["12+", "years"],
+  ["900+", "students"],
+  ["40+", "schools"],
+  ["0", "cookie-cutter portfolios"],
 ];
 
 export default function Hero() {
@@ -59,7 +60,19 @@ export default function Hero() {
       ref={root}
       className="hero-grain relative flex min-h-screen flex-col justify-between overflow-hidden bg-ink px-5 pb-8 pt-28 text-paper md:px-10 md:pb-12"
     >
-      <p className="hero-eyebrow font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
+      {/* photographic backdrop */}
+      <div className="hero-bg pointer-events-none absolute inset-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={IMAGES.hero}
+          alt=""
+          className="h-full w-full object-cover opacity-45"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-transparent to-transparent" />
+      </div>
+
+      <p className="hero-eyebrow relative z-10 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
         ( Creative studio — Istanbul / London / New York )
       </p>
 
@@ -73,9 +86,10 @@ export default function Hero() {
 
       <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
         <p className="hero-sub max-w-xl text-lg leading-snug text-paper/80 md:text-2xl">
-          Design House Istanbul is a creative studio helping brands win new
-          customers, captivate audiences, and quietly{" "}
-          <em className="italic">infuriate</em> their competition.
+          Design House Istanbul is a creative mentorship studio helping
+          ambitious students build <em className="italic">standout</em>{" "}
+          portfolios and win places at the world&apos;s best art &amp; design
+          schools.
         </p>
 
         <div className="grid grid-cols-2 gap-x-10 gap-y-6 font-mono sm:grid-cols-4 md:flex md:gap-10">

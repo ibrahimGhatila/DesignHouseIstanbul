@@ -3,25 +3,23 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
+import { IMAGES } from "@/lib/images";
 
 const POSTS = [
   {
-    tag: "News",
-    title: "Design House Istanbul Wins Awwwards Site of the Day",
-    from: "#9589d3",
-    to: "#2b2350",
+    tag: "Results",
+    title: "Our students earn places at the world's top art schools",
+    img: IMAGES.newsStudents,
   },
   {
-    tag: "Work",
-    title: "Behind the Build: Meridian's Design System",
-    from: "#6dc9bc",
-    to: "#0f3d37",
+    tag: "Inside",
+    title: "Anatomy of a portfolio that gets accepted",
+    img: IMAGES.newsPortfolio,
   },
   {
-    tag: "Work",
-    title: "New Launch: Bosphorus Hospitality Group",
-    from: "#ff3b2f",
-    to: "#7a1208",
+    tag: "Studio",
+    title: "Mentorship: how we shape a creative voice",
+    img: IMAGES.newsMentor,
   },
 ];
 
@@ -64,14 +62,13 @@ export default function News() {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {POSTS.map((p) => (
           <a key={p.title} href="#" className="news-card group block">
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
-              <div
-                className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${p.from}, ${p.to})`,
-                }}
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.img}
+                alt={p.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-[radial-gradient(#ffffff14_1px,transparent_1.5px)] [background-size:16px_16px]" />
             </div>
             <span className="mt-4 inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">
               {p.tag}

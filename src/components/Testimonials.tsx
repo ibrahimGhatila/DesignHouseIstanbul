@@ -7,24 +7,24 @@ import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
 const QUOTES = [
   {
     name: "Elif Demir",
-    role: "Designer in Residence",
-    company: "Pera Ventures",
+    role: "Now studying at",
+    company: "Central Saint Martins",
     quote:
-      "They're the studio I trust most to deliver work that's affordable, fast, and the highest quality for our early-stage startups.",
+      "They helped me find my voice as an artist. My portfolio finally felt like me — and it got me into my dream school.",
   },
   {
     name: "Marcus Hale",
-    role: "Marketing Director",
-    company: "Atlas Energy",
+    role: "Parent of admitted student",
+    company: "Parsons, New York",
     quote:
-      "The entire redesign was handled smoothly, and they kept us involved at every stage, presenting thoughtful work that reflected our feedback.",
+      "The mentorship was structured, honest, and genuinely caring. They kept us informed at every stage of the admissions journey.",
   },
   {
     name: "Renée Frey",
-    role: "Senior Designer",
-    company: "Meridian",
+    role: "Now studying at",
+    company: "Royal College of Art",
     quote:
-      "They take our designs and turn them into fully functional sites that look and perform beautifully. Their attention to detail is unmatched.",
+      "Every critique pushed my work further. Their attention to detail and care for craft is exactly what set my application apart.",
   },
 ];
 
