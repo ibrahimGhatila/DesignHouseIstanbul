@@ -57,7 +57,7 @@ export default function Nav() {
           Design House<span className="text-acid">.</span>
         </a>
 
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-mono text-xs uppercase tracking-[0.15em] text-white md:flex">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-base font-medium text-white md:flex">
           {LINKS.slice(0, 4).map(([label, href]) => (
             <a key={label} href={href} className="link-wipe">
               {label}
@@ -68,7 +68,7 @@ export default function Nav() {
         <div className="flex items-center gap-5">
           <a
             href="#contact"
-            className="hidden border border-white px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-ink md:inline-block"
+            className="hidden rounded-[3px] border border-white px-5 py-2 text-sm uppercase italic text-white transition-colors hover:bg-white hover:text-ink md:inline-block"
           >
             Contact
           </a>
