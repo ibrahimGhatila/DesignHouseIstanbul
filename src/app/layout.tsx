@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Archivo, DM_Mono } from "next/font/google";
+import { Archivo, Syne, DM_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import Loader from "@/components/Loader";
+import Cursor from "@/components/Cursor";
+import Grain from "@/components/Grain";
 
-// Bold grotesk for display + body (Paper Tiger pairs one grotesk family),
-// DM Mono for the small uppercase labels (same as Paper Tiger).
+// Wide characterful grotesk for display, clean grotesk for body, mono labels.
+const syne = Syne({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+});
+
 const archivo = Archivo({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const archivoDisplay = Archivo({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const dmMono = DM_Mono({
@@ -24,9 +26,9 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Design House Istanbul — Creative Studio",
+  title: "Design House Istanbul — Creative Portfolio Mentorship",
   description:
-    "Design House Istanbul is a creative studio shaping brands, spaces and digital products.",
+    "Design House Istanbul helps ambitious students build standout portfolios and win places at the world's best art & design schools.",
 };
 
 export default function RootLayout({
@@ -37,9 +39,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${archivoDisplay.variable} ${dmMono.variable}`}
+      className={`${syne.variable} ${archivo.variable} ${dmMono.variable}`}
     >
       <body>
+        <Grain />
+        <Cursor />
+        <Loader />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

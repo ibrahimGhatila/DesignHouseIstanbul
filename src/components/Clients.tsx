@@ -43,7 +43,7 @@ export default function Clients() {
             className="flex items-center font-display text-5xl font-extrabold uppercase tracking-tight md:text-8xl"
           >
             {n}
-            <span className="mx-8 text-accent md:mx-14">✳</span>
+            <span className="mx-8 text-clay md:mx-14">✳</span>
           </span>
         ))}
       </Marquee>

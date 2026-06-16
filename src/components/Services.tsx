@@ -89,10 +89,11 @@ export default function Services() {
       ref={root}
       className="bg-ink px-5 py-24 text-paper md:px-10 md:py-36"
     >
-      <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/50">
-        ( So, what do we do exactly? )
-      </p>
-      <h2 className="services-head max-w-[16ch] font-display text-[11vw] font-extrabold uppercase leading-[0.88] tracking-tight md:text-[6.5vw]">
+      <div className="mb-10 flex items-center justify-between border-b hairline pb-4 t-kicker text-paper/70">
+        <span>( What we do )</span>
+        <span>03 — Portfolio · Mentorship · Admissions</span>
+      </div>
+      <h2 className="services-head max-w-[16ch] font-display text-[11vw] uppercase leading-[0.88] md:text-[6.5vw]">
         We make portfolios impossible to ignore
       </h2>
 
@@ -114,7 +115,7 @@ export default function Services() {
                   ({s.n})
                 </span>
                 <span
-                  className="count font-display text-6xl font-extrabold tracking-tight text-accent md:text-8xl"
+                  className="count font-display text-6xl font-extrabold tracking-tight text-acid md:text-8xl"
                   data-target={s.count}
                   data-suffix={s.suffix}
                 >

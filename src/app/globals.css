@@ -1,19 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0a0a0a; /* near-black base */
+  --ink: #0b0b0b; /* true near-black */
   --paper: #f4f1ea; /* warm off-white */
-  --accent: #6dc9bc; /* mint, à la Paper Tiger */
-  --accent-2: #9589d3; /* soft purple */
-  --accent-3: #ff4d2e; /* punch red */
+  --paper-pure: #ffffff;
+
+  /* curated secondary palette — used only in sections that matter */
+  --acid: #d8f24a; /* lime */
+  --lilac: #c9c2f0; /* periwinkle */
+  --clay: #ec6242; /* warm coral */
+  --sky: #a9d6e5; /* soft sky */
+  --butter: #f0e2a6; /* cream yellow */
+
+  --ui-ease: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 @theme inline {
   --color-ink: var(--ink);
   --color-paper: var(--paper);
-  --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
-  --color-accent-3: var(--accent-3);
+  --color-paper-pure: var(--paper-pure);
+  --color-acid: var(--acid);
+  --color-lilac: var(--lilac);
+  --color-clay: var(--clay);
+  --color-sky: var(--sky);
+  --color-butter: var(--butter);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -21,27 +31,88 @@
 
 html {
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background: var(--ink);
   color: var(--paper);
   font-family: var(--font-sans), Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Fabric-like grain/vignette over dark sections (à la the Paper Tiger hero). */
-.hero-grain {
-  position: relative;
+/* hide native cursor on devices that get the custom one */
+@media (pointer: fine) {
+  body.has-cursor * {
+    cursor: none !important;
+  }
 }
-.hero-grain::before {
+
+::selection {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+/* ---------- display type helpers ---------- */
+.font-display {
+  font-family: var(--font-display), Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+}
+.t-kicker {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+/* ---------- full-page film grain ---------- */
+.grain-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- duotone imagery ---------- */
+.duotone {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+.duotone img {
+  filter: grayscale(1) contrast(1.12) brightness(0.92);
+  transition: filter 0.8s var(--ui-ease), transform 0.9s var(--ui-ease);
+}
+.duotone::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  mix-blend-mode: color;
+  background: var(--tint, transparent);
+  opacity: 0.55;
+  transition: opacity 0.8s var(--ui-ease);
   pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.duotone:hover img {
+  filter: grayscale(0) contrast(1.02) brightness(1);
+  transform: scale(1.04);
+}
+.duotone:hover::after {
+  opacity: 0;
+}
+
+/* ---------- hairline + grid ---------- */
+.hairline {
+  border-color: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+/* ---------- hero photographic backdrop ---------- */
+.hero-grain {
+  position: relative;
 }
 .hero-grain::after {
   content: "";
@@ -49,18 +120,40 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(
-    120% 80% at 50% 0%,
-    transparent 40%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
+  background: radial-gradient(120% 80% at 50% 0%, transparent 35%, rgba(0, 0, 0, 0.6) 100%);
 }
 .hero-grain > * {
   position: relative;
   z-index: 2;
 }
-/* photographic backdrop sits beneath the grain + content */
 .hero-grain > .hero-bg {
   position: absolute;
   z-index: 0;
+}
+
+/* link underline wipe */
+.link-wipe {
+  position: relative;
+}
+.link-wipe::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--ui-ease);
+}
+.link-wipe:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duotone img {
+    transition: none;
+  }
 }

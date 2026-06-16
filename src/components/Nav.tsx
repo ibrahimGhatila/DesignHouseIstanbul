@@ -54,7 +54,7 @@ export default function Nav() {
           href="#top"
           className="font-display text-xl font-extrabold uppercase tracking-tight text-white"
         >
-          Design House<span className="text-accent">.</span>
+          Design House<span className="text-acid">.</span>
         </a>
 
         <nav className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.15em] text-white md:flex">
@@ -77,7 +77,7 @@ export default function Nav() {
       {/* full-screen overlay menu */}
       <div
         ref={overlay}
-        className="fixed inset-0 z-40 flex -translate-y-full flex-col justify-between bg-accent px-5 pb-10 pt-28 text-ink md:px-10"
+        className="fixed inset-0 z-40 flex -translate-y-full flex-col justify-between bg-acid px-5 pb-10 pt-28 text-ink md:px-10"
       >
         <nav className="flex flex-col">
           {LINKS.map(([label, href]) => (

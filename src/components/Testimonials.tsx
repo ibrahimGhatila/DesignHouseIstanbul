@@ -66,7 +66,7 @@ export default function Testimonials() {
             <figcaption className="mt-10 font-mono text-xs uppercase tracking-[0.12em] text-ink/60">
               <div className="font-bold text-ink">{q.name}</div>
               <div>{q.role}</div>
-              <div className="text-accent">{q.company}</div>
+              <div className="text-clay">{q.company}</div>
             </figcaption>
           </figure>
         ))}

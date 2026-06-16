@@ -34,8 +34,18 @@ export default function SmoothScroll({
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    // Re-measure pinned / scrubbed triggers once layout settles.
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("loader:done", refresh);
+    window.addEventListener("load", refresh);
+    if (document.fonts?.ready) document.fonts.ready.then(refresh);
+    const t = window.setTimeout(refresh, 800);
+
     return () => {
       gsap.ticker.remove(tick);
+      window.removeEventListener("loader:done", refresh);
+      window.removeEventListener("load", refresh);
+      clearTimeout(t);
       lenis.destroy();
     };
   }, []);
