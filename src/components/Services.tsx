@@ -87,9 +87,9 @@ export default function Services() {
     <section
       id="expertise"
       ref={root}
-      className="bg-ink px-5 py-24 text-paper md:px-10 md:py-36"
+      className="bg-paper px-5 py-24 text-ink md:px-10 md:py-36"
     >
-      <div className="mb-10 flex items-center justify-between border-b hairline pb-4 t-kicker text-paper/70">
+      <div className="mb-10 flex items-center justify-between border-b hairline pb-4 t-kicker text-ink/60">
         <span>( What we do )</span>
         <span>03 — Portfolio · Mentorship · Admissions</span>
       </div>
@@ -111,11 +111,11 @@ export default function Services() {
 
             <div>
               <div className="flex items-baseline gap-6">
-                <span className="font-mono text-sm text-paper/40">
+                <span className="font-mono text-sm text-ink/40">
                   ({s.n})
                 </span>
                 <span
-                  className="count font-display text-6xl font-extrabold tracking-tight text-acid md:text-8xl"
+                  className="count font-display text-6xl font-extrabold tracking-tight text-clay md:text-8xl"
                   data-target={s.count}
                   data-suffix={s.suffix}
                 >
@@ -126,12 +126,12 @@ export default function Services() {
               <h3 className="mt-6 font-display text-5xl font-extrabold uppercase tracking-tight md:text-7xl">
                 {s.title}
               </h3>
-              <p className="mt-6 max-w-md text-lg leading-snug text-paper/70">
+              <p className="mt-6 max-w-md text-lg leading-snug text-ink/70">
                 {s.body}
               </p>
               <a
                 href="#contact"
-                className="mt-8 inline-block border-b border-paper pb-1 font-mono text-xs uppercase tracking-[0.15em] hover:opacity-60"
+                className="link-wipe mt-8 inline-block pb-1 font-mono text-xs uppercase tracking-[0.15em]"
               >
                 Learn more →
               </a>

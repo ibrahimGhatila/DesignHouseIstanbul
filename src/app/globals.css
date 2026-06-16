@@ -78,31 +78,18 @@ body {
 }
 
 /* ---------- duotone imagery ---------- */
+/* full-colour imagery with a subtle hover push (no muddy tint) */
 .duotone {
   position: relative;
   overflow: hidden;
   background: var(--ink);
 }
 .duotone img {
-  filter: grayscale(1) contrast(1.05) brightness(1.08);
-  transition: filter 0.8s var(--ui-ease), transform 0.9s var(--ui-ease);
-}
-.duotone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  mix-blend-mode: screen;
-  background: var(--tint, transparent);
-  opacity: 0.32;
-  transition: opacity 0.8s var(--ui-ease);
-  pointer-events: none;
+  filter: saturate(1.05) contrast(1.03);
+  transition: transform 0.9s var(--ui-ease);
 }
 .duotone:hover img {
-  filter: grayscale(0) contrast(1.02) brightness(1);
-  transform: scale(1.04);
-}
-.duotone:hover::after {
-  opacity: 0;
+  transform: scale(1.05);
 }
 
 /* ---------- hairline + grid ---------- */

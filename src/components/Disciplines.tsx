@@ -47,7 +47,7 @@ export default function Disciplines() {
   );
 
   return (
-    <section id="disciplines" ref={root} className="bg-ink text-paper">
+    <section id="disciplines" ref={root} className="bg-paper text-ink">
       <div className="flex items-center justify-between border-b hairline px-5 py-4 t-kicker md:px-10">
         <span>( Disciplines )</span>
         <span>02 — Six paths, one standard</span>
@@ -64,7 +64,7 @@ export default function Disciplines() {
           >
             <div className="mb-4 flex items-baseline justify-between">
               <span className="font-display text-lg">{it.n}</span>
-              <span className="t-kicker text-paper/50">{it.desc}</span>
+              <span className="t-kicker text-ink/50">{it.desc}</span>
             </div>
             <DuotoneImage
               src={it.img}

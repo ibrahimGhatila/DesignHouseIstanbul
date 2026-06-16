@@ -74,7 +74,7 @@ export default function Hero() {
         <p className="hero-fade top mb-6 t-kicker text-paper/60">
           ( Creative futures since 2012 )
         </p>
-        <h1 className="hero-title font-display text-[12vw] uppercase leading-[0.88] md:text-[9.5vw]">
+        <h1 className="hero-title font-display text-[15vw] uppercase leading-[0.86] md:text-[11vw]">
           <span className="block">Crafted Bold,</span>
           <span className="block italic font-[600] text-acid">Built to Last</span>
         </h1>
