@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0a0a0a; /* near-black base */
+  --paper: #f4f1ea; /* warm off-white */
+  --accent: #6dc9bc; /* mint, à la Paper Tiger */
+  --accent-2: #9589d3; /* soft purple */
+  --accent-3: #ff4d2e; /* punch red */
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans), Arial, sans-serif;
+}
