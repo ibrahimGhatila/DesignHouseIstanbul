@@ -5,16 +5,19 @@ import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
 
 /**
- * Infinite horizontal marquee like Paper Tiger's client / stats strips.
- * The base loop runs continuously; scroll velocity nudges its speed and the
- * direction flips with scroll direction for that reactive, alive feel.
+ * Infinite horizontal marquee à la Paper Tiger. Runs continuously; scroll
+ * velocity briefly boosts its speed and scroll direction flips the loop.
  */
 export default function Marquee({
-  items,
-  baseSpeed = 60,
+  children,
+  baseSpeed = 30,
+  direction = 1,
+  className = "",
 }: {
-  items: string[];
+  children: React.ReactNode;
   baseSpeed?: number;
+  direction?: 1 | -1;
+  className?: string;
 }) {
   const track = useRef<HTMLDivElement>(null);
 
@@ -22,26 +25,26 @@ export default function Marquee({
     () => {
       registerGsap();
       const el = track.current!;
-      // Two copies sit side by side; wrap at -50% for a seamless loop.
       const loop = gsap.to(el, {
         xPercent: -50,
         repeat: -1,
         ease: "none",
         duration: baseSpeed,
       });
+      loop.timeScale(direction);
 
-      let direction = 1;
+      let dir = direction;
       ScrollTrigger.create({
         onUpdate: (self) => {
           const v = self.getVelocity();
-          if (v !== 0) direction = v < 0 ? -1 : 1;
-          // Speed up the loop briefly with scroll velocity.
-          const boost = 1 + Math.min(Math.abs(v) / 1000, 4);
+          if (v !== 0) dir = (v < 0 ? -1 : 1) * direction;
+          const boost = 1 + Math.min(Math.abs(v) / 800, 4);
           gsap.to(loop, {
-            timeScale: direction * boost,
-            duration: 0.3,
+            timeScale: dir * boost,
+            duration: 0.25,
             overwrite: true,
-            onComplete: () => gsap.to(loop, { timeScale: direction, duration: 0.6 }),
+            onComplete: () =>
+              gsap.to(loop, { timeScale: dir, duration: 0.6 }),
           });
         },
       });
@@ -49,20 +52,13 @@ export default function Marquee({
     { scope: track }
   );
 
-  const row = [...items, ...items];
-
   return (
-    <div className="overflow-hidden whitespace-nowrap border-y border-ink/15 py-6">
-      <div ref={track} className="flex w-max">
-        {row.map((item, i) => (
-          <span
-            key={i}
-            className="flex items-center font-display text-4xl font-bold uppercase tracking-tight md:text-6xl"
-          >
-            {item}
-            <span className="mx-8 text-accent md:mx-12">✳</span>
-          </span>
-        ))}
+    <div className={`overflow-hidden ${className}`}>
+      <div ref={track} className="flex w-max flex-nowrap">
+        <div className="flex flex-nowrap items-center">{children}</div>
+        <div className="flex flex-nowrap items-center" aria-hidden>
+          {children}
+        </div>
       </div>
     </div>
   );

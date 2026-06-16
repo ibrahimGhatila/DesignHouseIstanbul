@@ -4,11 +4,13 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, SplitText, registerGsap } from "@/lib/gsap";
 
-/**
- * Hero with Paper Tiger's signature letter-by-letter headline reveal:
- * SplitText splits the headline into characters, each rises up from behind
- * a mask with a staggered, eased entrance.
- */
+const STATS = [
+  ["15+", "years"],
+  ["480+", "projects"],
+  ["3", "continents"],
+  ["0", "boring briefs"],
+];
+
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
 
@@ -17,32 +19,33 @@ export default function Hero() {
       registerGsap();
 
       const split = new SplitText(".hero-title", {
-        type: "chars,words,lines",
-        mask: "lines", // each line clips its chars so they reveal from behind
+        type: "chars,lines",
+        mask: "lines",
         linesClass: "overflow-hidden",
       });
 
-      const tl = gsap.timeline({ defaults: { ease: "pt" } });
-
-      tl.from(split.chars, {
-        yPercent: 120,
-        duration: 1.1,
-        stagger: 0.025,
-      })
+      gsap
+        .timeline({ defaults: { ease: "pt" } })
+        .from(".hero-eyebrow", { opacity: 0, y: 14, duration: 0.7 })
         .from(
-          ".hero-eyebrow",
-          { opacity: 0, y: 16, duration: 0.8 },
-          "0.2"
+          split.chars,
+          { yPercent: 120, duration: 1.1, stagger: 0.02 },
+          "-=0.3"
+        )
+        .from(
+          ".hero-line",
+          { scaleX: 0, transformOrigin: "left", duration: 1 },
+          "-=0.7"
         )
         .from(
           ".hero-sub",
           { opacity: 0, y: 24, duration: 0.9 },
-          "0.4"
+          "-=0.6"
         )
         .from(
           ".hero-stat",
-          { opacity: 0, y: 28, duration: 0.8, stagger: 0.08 },
-          "0.55"
+          { opacity: 0, y: 24, duration: 0.7, stagger: 0.08 },
+          "-=0.6"
         );
 
       return () => split.revert();
@@ -52,35 +55,38 @@ export default function Hero() {
 
   return (
     <section
+      id="top"
       ref={root}
-      className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-ink px-5 pb-10 pt-28 text-paper md:px-10 md:pb-16"
+      className="hero-grain relative flex min-h-screen flex-col justify-between overflow-hidden bg-ink px-5 pb-8 pt-28 text-paper md:px-10 md:pb-12"
     >
-      <p className="hero-eyebrow font-mono text-xs uppercase tracking-[0.2em] text-paper/60">
-        Istanbul · Design Studio · Est. 2009
+      <p className="hero-eyebrow font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
+        ( Creative studio — Istanbul / London / New York )
       </p>
 
-      <h1 className="hero-title max-w-[14ch] font-display text-[15vw] font-extrabold uppercase leading-[0.88] tracking-[-0.02em] md:text-[11vw]">
-        Crafted in Istanbul, felt everywhere
+      <h1 className="hero-title font-display text-[16vw] font-extrabold uppercase leading-[0.85] tracking-[-0.02em] md:text-[12vw]">
+        Crafted Bold,
+        <br />
+        Built to Last
       </h1>
 
+      <div className="hero-line h-px w-full bg-paper/20" />
+
       <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-        <p className="hero-sub max-w-md text-lg leading-snug text-paper/80 md:text-xl">
-          Design House Istanbul is a creative studio shaping brands, spaces and
-          digital products that make competitors{" "}
-          <em className="italic">nervous</em>.
+        <p className="hero-sub max-w-xl text-lg leading-snug text-paper/80 md:text-2xl">
+          Design House Istanbul is a creative studio helping brands win new
+          customers, captivate audiences, and quietly{" "}
+          <em className="italic">infuriate</em> their competition.
         </p>
 
-        <div className="flex gap-10 font-mono text-sm">
-          {[
-            ["15+", "years"],
-            ["400+", "projects"],
-            ["3", "continents"],
-          ].map(([n, l]) => (
+        <div className="grid grid-cols-2 gap-x-10 gap-y-6 font-mono sm:grid-cols-4 md:flex md:gap-10">
+          {STATS.map(([n, l]) => (
             <div key={l} className="hero-stat">
-              <div className="text-3xl font-bold tracking-tight text-accent">
+              <div className="font-display text-3xl font-bold tracking-tight text-accent md:text-4xl">
                 {n}
               </div>
-              <div className="uppercase tracking-widest text-paper/50">{l}</div>
+              <div className="text-[10px] uppercase tracking-widest text-paper/50">
+                {l}
+              </div>
             </div>
           ))}
         </div>

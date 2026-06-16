@@ -1,18 +1,27 @@
+import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
-import RevealSection from "@/components/RevealSection";
+import Clients from "@/components/Clients";
+import Projects from "@/components/Projects";
+import Services from "@/components/Services";
+import News from "@/components/News";
+import StatsMarquee from "@/components/StatsMarquee";
+import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <div className="bg-paper text-ink">
-        <Marquee
-          items={["Branding", "Web", "Spaces", "Strategy", "Motion"]}
-          baseSpeed={50}
-        />
-      </div>
-      <RevealSection />
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Clients />
+        <Projects />
+        <Services />
+        <News />
+        <StatsMarquee />
+        <Testimonials />
+        <Footer />
+      </main>
+    </>
   );
 }
