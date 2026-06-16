@@ -4,44 +4,25 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
 
-// The schools our students get into — two mirrored monospace columns that
-// stream upward (parallax) behind the giant title, with a top/bottom fade.
-const LEFT = [
-  "Central Saint Martins",
-  "Royal College of Art",
-  "Parsons School of Design",
-  "Rhode Island School of Design",
-  "Politecnico di Milano",
-  "Pratt Institute",
-  "University of the Arts London",
-  "ArtCenter College of Design",
-  "Aalto University",
-  "Design Academy Eindhoven",
-  "Glasgow School of Art",
-  "Bezalel Academy",
-  "Goldsmiths, London",
-  "ECAL Lausanne",
-  "HEAD Genève",
-  "Gerrit Rietveld Academie",
-];
-
-const RIGHT = [
-  "IED Milano",
-  "NABA Milano",
-  "Domus Academy",
-  "Konstfack",
-  "UMPRUM Prague",
-  "Sandberg Instituut",
-  "SCAD",
-  "CalArts",
-  "School of Visual Arts",
-  "Cooper Union",
-  "OCAD University",
-  "Emily Carr",
-  "Musashino Art University",
-  "Tama Art University",
-  "RMIT",
-  "ELISAVA Barcelona",
+// Each row = a school on the left and right of a centre channel. As you scroll
+// the two sides slide in and "come together", row by row, top to bottom.
+const ROWS: [string, string][] = [
+  ["Central Saint Martins", "IED Milano"],
+  ["Royal College of Art", "NABA Milano"],
+  ["Parsons School of Design", "Domus Academy"],
+  ["Rhode Island School of Design", "Konstfack"],
+  ["Politecnico di Milano", "UMPRUM Prague"],
+  ["Pratt Institute", "Sandberg Instituut"],
+  ["University of the Arts London", "SCAD"],
+  ["ArtCenter College of Design", "CalArts"],
+  ["Aalto University", "School of Visual Arts"],
+  ["Design Academy Eindhoven", "Cooper Union"],
+  ["Glasgow School of Art", "OCAD University"],
+  ["Bezalel Academy", "Emily Carr"],
+  ["Goldsmiths, London", "Musashino Art University"],
+  ["ECAL Lausanne", "Tama Art University"],
+  ["HEAD Genève", "RMIT"],
+  ["Gerrit Rietveld Academie", "ELISAVA Barcelona"],
 ];
 
 export default function Clients() {
@@ -50,53 +31,64 @@ export default function Clients() {
   useGSAP(
     () => {
       registerGsap();
-      const st = {
-        trigger: root.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      };
-      gsap.fromTo(".col-left", { y: 120 }, { y: -320, ease: "none", scrollTrigger: st });
-      gsap.fromTo(".col-right", { y: 260 }, { y: -460, ease: "none", scrollTrigger: st });
-      gsap.fromTo(".clients-title", { y: 80 }, { y: -160, ease: "none", scrollTrigger: st });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top 75%",
+          end: "bottom 75%",
+          scrub: 1,
+        },
+      });
+
+      tl.from(".cell-l", {
+        xPercent: -60,
+        opacity: 0,
+        ease: "none",
+        stagger: 0.4,
+      }).from(
+        ".cell-r",
+        { xPercent: 60, opacity: 0, ease: "none", stagger: 0.4 },
+        0
+      );
+
+      gsap.from(".clients-title", {
+        opacity: 0,
+        scale: 0.9,
+        ease: "pt",
+        scrollTrigger: { trigger: root.current, start: "top 80%" },
+      });
     },
     { scope: root }
   );
-
-  const mask =
-    "linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%)";
 
   return (
     <section
       id="clients"
       ref={root}
-      className="relative overflow-hidden bg-paper py-[12vh] text-ink"
+      className="relative overflow-hidden bg-paper py-24 text-ink md:py-32"
     >
-      <div className="mx-auto flex items-center justify-between px-5 pb-6 t-kicker text-ink/50 md:px-10">
+      <div className="mx-auto mb-14 flex max-w-6xl items-center justify-between px-5 t-kicker text-ink/50 md:px-10">
         <span>( Where our students get in )</span>
         <span>01</span>
       </div>
 
-      <div
-        className="relative mx-auto h-[78vh] w-full max-w-6xl overflow-hidden px-5"
-        style={{ WebkitMaskImage: mask, maskImage: mask }}
-      >
+      <div className="relative mx-auto max-w-6xl px-5 md:px-10">
         {/* giant overlapping title */}
-        <h2 className="clients-title pointer-events-none absolute left-1/2 top-[22%] z-10 -translate-x-1/2 text-center font-display text-[12vw] uppercase leading-[0.85] md:text-[8vw]">
+        <h2 className="clients-title pointer-events-none absolute left-1/2 top-[-2.5rem] z-10 -translate-x-1/2 text-center font-display text-[13vw] uppercase leading-[0.85] md:top-[-3rem] md:text-[7vw]">
           Destinations
         </h2>
 
-        <div className="flex h-full justify-center gap-6 font-mono text-base leading-[2] md:gap-16 md:text-lg">
-          <ul className="col-left w-1/2 text-right">
-            {LEFT.map((n) => (
-              <li key={n}>{n}</li>
-            ))}
-          </ul>
-          <ul className="col-right w-1/2 pt-[34vh] text-left">
-            {RIGHT.map((n) => (
-              <li key={n}>{n}</li>
-            ))}
-          </ul>
+        <div className="flex flex-col font-mono text-sm leading-none md:text-lg">
+          {ROWS.map(([l, r], i) => (
+            <div
+              key={i}
+              className="client-row grid grid-cols-2 gap-8 py-2 md:gap-24"
+            >
+              <span className="cell-l text-right">{l}</span>
+              <span className="cell-r text-left">{r}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
