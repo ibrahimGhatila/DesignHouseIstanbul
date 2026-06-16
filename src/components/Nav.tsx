@@ -52,26 +52,34 @@ export default function Nav() {
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
         <a
           href="#top"
-          className="font-display text-xl font-extrabold uppercase tracking-tight text-white"
+          className="font-display text-lg font-extrabold uppercase tracking-tight text-white"
         >
           Design House<span className="text-acid">.</span>
         </a>
 
-        <nav className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.15em] text-white md:flex">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-mono text-xs uppercase tracking-[0.15em] text-white md:flex">
           {LINKS.slice(0, 4).map(([label, href]) => (
-            <a key={label} href={href} className="hover:opacity-60">
+            <a key={label} href={href} className="link-wipe">
               {label}
             </a>
           ))}
         </nav>
 
-        <button
-          onClick={toggle}
-          className="font-mono text-xs uppercase tracking-[0.2em] text-white"
-          aria-expanded={open}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
+        <div className="flex items-center gap-5">
+          <a
+            href="#contact"
+            className="hidden border border-white px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-ink md:inline-block"
+          >
+            Contact
+          </a>
+          <button
+            onClick={toggle}
+            className="font-mono text-xs uppercase tracking-[0.2em] text-white md:hidden"
+            aria-expanded={open}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
       </header>
 
       {/* full-screen overlay menu */}

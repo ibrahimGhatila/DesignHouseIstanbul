@@ -56,9 +56,9 @@ body {
 /* ---------- display type helpers ---------- */
 .font-display {
   font-family: var(--font-display), Arial, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 0.86;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 0.84;
 }
 .t-kicker {
   font-family: var(--font-mono), monospace;

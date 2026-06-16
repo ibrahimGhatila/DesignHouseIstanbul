@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Archivo, Syne, DM_Mono } from "next/font/google";
+import { Archivo, DM_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Loader from "@/components/Loader";
 import Cursor from "@/components/Cursor";
 import Grain from "@/components/Grain";
 
-// Wide characterful grotesk for display, clean grotesk for body, mono labels.
-const syne = Syne({
+// Heavy, tight grotesk for display (à la the inspiration), regular for body.
+const archivoDisplay = Archivo({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["800", "900"],
 });
 
 const archivo = Archivo({
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${archivo.variable} ${dmMono.variable}`}
+      className={`${archivoDisplay.variable} ${archivo.variable} ${dmMono.variable}`}
     >
       <body>
         <Grain />
