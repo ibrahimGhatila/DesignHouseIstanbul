@@ -38,10 +38,9 @@ export default function Footer() {
       </div>
 
       <a href="mailto:hello@designhouseist.com" className="group block">
-        <h2 className="footer-cta mt-8 font-display text-[17vw] uppercase leading-[0.82]">
-          Build your
-          <br />
-          future<span className="italic">.</span>
+        <h2 className="footer-cta mt-8 font-display text-[13vw] uppercase leading-[0.86]">
+          <span className="block">Build your</span>
+          <span className="block">future<span className="italic text-ink/70">.</span></span>
         </h2>
         <span className="link-wipe mt-8 inline-block font-mono text-sm uppercase tracking-[0.15em]">
           hello@designhouseist.com →

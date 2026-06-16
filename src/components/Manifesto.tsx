@@ -35,8 +35,9 @@ export default function Manifesto() {
         <span>( Manifesto )</span>
         <span>01</span>
       </div>
-      <p className="manifesto-text mt-12 max-w-[20ch] font-display text-[10vw] uppercase leading-[0.92] md:max-w-[16ch] md:text-[5.6vw]">
-        Talent gets noticed. We make sure it gets <span className="italic">in</span>.
+      <p className="manifesto-text mt-12 max-w-[18ch] font-display text-[8vw] uppercase leading-[0.95] md:max-w-[15ch] md:text-[4.6vw]">
+        Talent gets noticed. We make sure it gets{" "}
+        <span className="italic">in</span>.
       </p>
       <p className="mt-10 max-w-md text-base leading-snug text-ink/70 md:ml-auto md:text-lg">
         A portfolio is an argument. We help you make it undeniable — through

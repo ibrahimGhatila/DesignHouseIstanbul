@@ -84,16 +84,16 @@ body {
   background: var(--ink);
 }
 .duotone img {
-  filter: grayscale(1) contrast(1.12) brightness(0.92);
+  filter: grayscale(1) contrast(1.05) brightness(1.08);
   transition: filter 0.8s var(--ui-ease), transform 0.9s var(--ui-ease);
 }
 .duotone::after {
   content: "";
   position: absolute;
   inset: 0;
-  mix-blend-mode: color;
+  mix-blend-mode: screen;
   background: var(--tint, transparent);
-  opacity: 0.55;
+  opacity: 0.32;
   transition: opacity 0.8s var(--ui-ease);
   pointer-events: none;
 }

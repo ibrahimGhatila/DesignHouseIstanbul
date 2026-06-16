@@ -74,9 +74,9 @@ export default function Hero() {
         <p className="hero-fade top mb-6 t-kicker text-paper/60">
           ( Creative futures since 2012 )
         </p>
-        <h1 className="hero-title font-display text-[19vw] uppercase leading-[0.82] md:text-[14vw]">
-          Crafted Bold,{" "}
-          <span className="italic font-[600] text-acid">Built to Last</span>
+        <h1 className="hero-title font-display text-[12vw] uppercase leading-[0.88] md:text-[9.5vw]">
+          <span className="block">Crafted Bold,</span>
+          <span className="block italic font-[600] text-acid">Built to Last</span>
         </h1>
       </div>
 
@@ -113,10 +113,10 @@ function DuotoneBg({ src }: { src: string }) {
       <img
         src={src}
         alt=""
-        className="h-full w-full object-cover opacity-55 grayscale contrast-110"
+        className="h-full w-full object-cover opacity-80 contrast-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/10 to-transparent" />
     </>
   );
 }
