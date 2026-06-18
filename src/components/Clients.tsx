@@ -74,8 +74,8 @@ export default function Clients() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-5 md:px-10">
-        {/* giant overlapping title */}
-        <h2 className="clients-title pointer-events-none absolute left-1/2 top-[-2.5rem] z-10 -translate-x-1/2 text-center font-display text-[13vw] uppercase leading-[0.85] md:top-[-3rem] md:text-[7vw]">
+        {/* giant title */}
+        <h2 className="clients-title mb-12 text-center font-display text-[14vw] uppercase leading-[0.85] md:mb-20 md:text-[8vw]">
           Destinations
         </h2>
 
