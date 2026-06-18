@@ -55,8 +55,9 @@ export default function Services() {
       registerGsap();
 
       const split = new SplitText(".services-head", {
-        type: "chars",
-        mask: "chars",
+        type: "lines,words,chars",
+        mask: "lines",
+        linesClass: "overflow-hidden",
       });
       gsap.from(split.chars, {
         yPercent: 110,
