@@ -85,7 +85,7 @@ body {
   background: var(--ink);
 }
 .duotone img {
-  filter: saturate(1.05) contrast(1.03);
+  filter: saturate(1.08) contrast(1.04) brightness(1.12);
   transition: transform 0.9s var(--ui-ease);
 }
 .duotone:hover img {
