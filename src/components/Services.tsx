@@ -2,41 +2,15 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, SplitText, registerGsap } from "@/lib/gsap";
-import { IMAGES } from "@/lib/images";
+import { gsap, SplitText, registerGsap } from "@/lib/gsap";
 import DuotoneImage from "./DuotoneImage";
+import { defaultDesignHouseContent, type DesignHouseContent } from "@/lib/cms/designHouseContent";
 
-const SERVICES = [
-  {
-    n: "01",
-    title: "Portfolio",
-    body: "We help you build a body of work with a clear creative voice. From idea to final artwork, we shape projects that show range, intent and craft — the things admissions panels actually look for.",
-    count: 96,
-    suffix: "%",
-    metric: "first-choice acceptance",
-    img: IMAGES.newsPortfolio,
-  },
-  {
-    n: "02",
-    title: "Mentorship",
-    body: "One-on-one guidance from practicing artists and designers. We meet you where you are, push your thinking, and keep you accountable through every critique, draft and deadline.",
-    count: 900,
-    suffix: "+",
-    metric: "students mentored",
-    img: IMAGES.newsMentor,
-  },
-  {
-    n: "03",
-    title: "Admissions",
-    body: "Strategy that gets you in. We map school fit, deadlines, interviews and statements — the full path to the world's best art & design programmes, minus the guesswork.",
-    count: 40,
-    suffix: "+",
-    metric: "partner schools placed into",
-    img: IMAGES.newsStudents,
-  },
-];
+type Props = {
+  content?: DesignHouseContent["services"];
+};
 
-export default function Services() {
+export default function Services({ content = defaultDesignHouseContent.services }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -90,15 +64,15 @@ export default function Services() {
       className="bg-paper px-5 py-24 text-ink md:px-10 md:py-36"
     >
       <div className="mb-10 flex items-center justify-between border-b hairline pb-4 t-kicker text-ink/60">
-        <span>( What we do )</span>
-        <span>03</span>
+        <span>{content.kicker}</span>
+        <span>{content.index}</span>
       </div>
       <h2 className="services-head max-w-[15ch] font-display text-[11vw] uppercase leading-[0.9] md:text-[6vw]">
-        We make portfolios impossible to ignore
+        {content.title}
       </h2>
 
       <div className="mt-20 flex flex-col gap-24 md:mt-32 md:gap-40">
-        {SERVICES.map((s, i) => (
+        {content.items.map((s, i) => (
           <div
             key={s.title}
             className="svc-row grid grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-16"
@@ -137,10 +111,10 @@ export default function Services() {
                 {s.body}
               </p>
               <a
-                href="#contact"
+                href={s.cta_href}
                 className="link-wipe mt-8 inline-block font-mono text-xs uppercase tracking-[0.15em]"
               >
-                Learn more →
+                {s.cta_label}
               </a>
             </div>
           </div>
@@ -149,3 +123,4 @@ export default function Services() {
     </section>
   );
 }
+

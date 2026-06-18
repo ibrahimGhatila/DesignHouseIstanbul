@@ -2,20 +2,15 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
-import { IMAGES } from "@/lib/images";
+import { gsap, registerGsap } from "@/lib/gsap";
 import DuotoneImage from "./DuotoneImage";
+import { defaultDesignHouseContent, type DesignHouseContent } from "@/lib/cms/designHouseContent";
 
-const ITEMS = [
-  { n: "01", name: "Spatial Design", desc: "Architecture & interior", img: IMAGES.spatial, bg: "var(--sky)" },
-  { n: "02", name: "Visual Comms", desc: "Graphic design & type", img: IMAGES.visual, bg: "var(--clay)" },
-  { n: "03", name: "Fine Arts", desc: "Studio practice", img: IMAGES.fineArt, bg: "var(--butter)" },
-  { n: "04", name: "Industrial", desc: "Product & object", img: IMAGES.industrial, bg: "var(--acid)" },
-  { n: "05", name: "Fashion", desc: "Concept & textile", img: IMAGES.fashion, bg: "var(--lilac)" },
-  { n: "06", name: "Photo & Film", desc: "Visual storytelling", img: IMAGES.photography, bg: "var(--sky)" },
-];
+type Props = {
+  content?: DesignHouseContent["disciplines"];
+};
 
-export default function Disciplines() {
+export default function Disciplines({ content = defaultDesignHouseContent.disciplines }: Props) {
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
 
@@ -46,8 +41,8 @@ export default function Disciplines() {
   return (
     <section id="disciplines" ref={root} className="overflow-hidden bg-ink text-paper">
       <div className="flex items-center justify-between border-b border-paper/15 px-5 py-4 t-kicker text-paper/60 md:px-10">
-        <span>( Disciplines )</span>
-        <span>02 — Selected work</span>
+        <span>{content.kicker}</span>
+        <span>{content.index_label}</span>
       </div>
 
       <div
@@ -57,19 +52,18 @@ export default function Disciplines() {
         {/* title panel */}
         <div className="flex w-[78vw] shrink-0 flex-col justify-center pr-6 sm:w-[52vw] md:w-[32vw]">
           <h2 className="font-display text-6xl uppercase leading-[0.85] md:text-8xl">
-            Selected
+            {content.title_line_1}
             <br />
-            Work
+            {content.title_line_2}
           </h2>
           <p className="mt-6 max-w-xs text-paper/60">
-            Six creative paths we help students master — from first sketch to
-            final portfolio.
+            {content.intro}
           </p>
-          <span className="mt-8 t-kicker text-paper/40">Scroll →</span>
+          <span className="mt-8 t-kicker text-paper/40">{content.scroll_label}</span>
         </div>
 
         {/* discipline cards */}
-        {ITEMS.map((it) => (
+        {content.items.map((it) => (
           <article
             key={it.n}
             className="group w-[78vw] shrink-0 sm:w-[52vw] md:w-[26vw]"
@@ -96,13 +90,16 @@ export default function Disciplines() {
 
         {/* end CTA */}
         <div className="flex w-[78vw] shrink-0 items-center justify-center sm:w-[40vw] md:w-[24vw]">
-          <a href="#contact" className="link-wipe font-display text-3xl uppercase md:text-4xl">
-            Find your
-            <br />
-            path →
+          <a href={content.cta_href} className="link-wipe font-display text-3xl uppercase md:text-4xl">
+            {content.cta_label.split("\n").map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
           </a>
         </div>
       </div>
     </section>
   );
 }
+

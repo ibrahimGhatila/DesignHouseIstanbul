@@ -2,17 +2,31 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, SplitText, ScrollTrigger, registerGsap } from "@/lib/gsap";
+import { gsap, SplitText, registerGsap } from "@/lib/gsap";
 import HeroCards from "./HeroCards";
+import { defaultDesignHouseContent, type DesignHouseContent } from "@/lib/cms/designHouseContent";
 
-const STATS = [
-  ["12+", "years"],
-  ["900+", "students"],
-  ["40+", "schools"],
-  ["0", "boring portfolios"],
-];
+type Props = {
+  content?: DesignHouseContent["hero"];
+  heroCards?: DesignHouseContent["heroCards"];
+};
 
-export default function Hero() {
+function renderDescription(text: string, italic: string) {
+  if (!italic || !text.includes(italic)) return text;
+  const [before, after] = text.split(italic);
+  return (
+    <>
+      {before}
+      <span className="italic">{italic}</span>
+      {after}
+    </>
+  );
+}
+
+export default function Hero({
+  content = defaultDesignHouseContent.hero,
+  heroCards = defaultDesignHouseContent.heroCards,
+}: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -84,34 +98,32 @@ export default function Hero() {
       <div className="sticky top-0 flex h-screen flex-col justify-between overflow-hidden px-5 pb-6 pt-28 text-ink md:px-10 md:pb-8 md:pt-32">
         {/* top headline */}
         <h1 className="hero-text hero-line relative z-10 whitespace-nowrap text-center font-display text-[13.5vw] uppercase leading-[0.82] md:text-[11.5vw]">
-          Crafted Bold
+          {content.top_title}
         </h1>
 
         {/* centre cycling card stack */}
         <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
           <div className="hero-stack pointer-events-auto relative h-[52vh] w-[64vw] max-w-[340px] md:h-[60vh] md:w-[24vw]">
-            <HeroCards />
+            <HeroCards content={heroCards} />
           </div>
         </div>
 
         {/* bottom headline + meta */}
         <div className="hero-text relative z-10">
           <h1 className="hero-line whitespace-nowrap text-center font-display text-[13.5vw] uppercase leading-[0.82] md:text-[11.5vw]">
-            Built to Last
+            {content.bottom_title}
           </h1>
           <div className="mt-6 flex items-end justify-between gap-6">
             <div className="hero-fade font-mono text-[11px] leading-relaxed text-ink md:text-xs">
-              {STATS.map(([n, l]) => (
-                <div key={l} className="flex gap-3">
-                  <span className="w-10 shrink-0">{n}</span>
-                  <span className="text-ink/70">{l}</span>
+              {content.stats.map((stat) => (
+                <div key={stat.label} className="flex gap-3">
+                  <span className="w-10 shrink-0">{stat.value}</span>
+                  <span className="text-ink/70">{stat.label}</span>
                 </div>
               ))}
             </div>
             <p className="hero-fade max-w-[16rem] text-right text-sm leading-snug text-ink md:max-w-xs md:text-base">
-              Design House Istanbul helps students build standout portfolios
-              and <span className="italic">win places</span> at the
-              world&apos;s best art &amp; design schools.
+              {renderDescription(content.description, content.description_italic)}
             </p>
           </div>
         </div>
@@ -119,9 +131,9 @@ export default function Hero() {
         {/* black intro panel revealed at the end of the sequence */}
         <div className="hero-intro pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-ink opacity-0">
           <div className="hero-intro-inner text-center">
-            <p className="mb-4 t-kicker text-paper/50">( Istanbul )</p>
+            <p className="mb-4 t-kicker text-paper/50">{content.intro_kicker}</p>
             <h2 className="font-display text-[14vw] uppercase leading-[0.85] text-paper md:text-[11vw]">
-              Design House
+              {content.intro_title}
             </h2>
           </div>
         </div>

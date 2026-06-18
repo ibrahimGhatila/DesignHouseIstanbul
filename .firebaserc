@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "aba-production-496119"
+  },
+  "targets": {
+    "aba-production-496119": {
+      "hosting": {
+        "design-house-istanbul": [
+          "design-house-istanbul"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

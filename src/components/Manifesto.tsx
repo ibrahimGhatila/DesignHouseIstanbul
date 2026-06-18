@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, SplitText, registerGsap } from "@/lib/gsap";
+import { gsap, SplitText, registerGsap } from "@/lib/gsap";
 
 export default function Manifesto() {
   const root = useRef<HTMLElement>(null);

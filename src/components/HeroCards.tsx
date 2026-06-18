@@ -2,35 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap, registerGsap } from "@/lib/gsap";
-import { IMAGES } from "@/lib/images";
+import { defaultDesignHouseContent, type DesignHouseContent } from "@/lib/cms/designHouseContent";
 
-// Each "card" loops its motion, then the stack swaps to the next one — like
-// the inspiration's hero, where every card plays then changes on loop end.
-const MEDIA = [
-  { img: IMAGES.fashion, label: "Fashion", back: ["#c9c2f0", "#f0bcd2"] },
-  { img: IMAGES.spatial, label: "Spatial", back: ["#a9d6e5", "#d8f24a"] },
-  { img: IMAGES.fineArt, label: "Fine Arts", back: ["#f0bcd2", "#c9c2f0"] },
-  { img: IMAGES.industrial, label: "Industrial", back: ["#d8f24a", "#a9d6e5"] },
-  { img: IMAGES.photography, label: "Photo & Film", back: ["#f0e2a6", "#ec6242"] },
-  { img: IMAGES.visual, label: "Visual", back: ["#ec6242", "#c9c2f0"] },
-];
+type Props = {
+  content?: DesignHouseContent["heroCards"];
+};
 
-const LOOP_MS = 3600;
-
-export default function HeroCards() {
+export default function HeroCards({ content = defaultDesignHouseContent.heroCards }: Props) {
   const [i, setI] = useState(0);
   const front = useRef<HTMLDivElement>(null);
   const img = useRef<HTMLImageElement>(null);
   const bar = useRef<HTMLDivElement>(null);
+  const media = content.items.length ? content.items : defaultDesignHouseContent.heroCards.items;
+  const loopMs = content.loop_ms || defaultDesignHouseContent.heroCards.loop_ms;
 
   // advance to the next card when the loop finishes
   useEffect(() => {
     const id = window.setInterval(
-      () => setI((p) => (p + 1) % MEDIA.length),
-      LOOP_MS
+      () => setI((p) => (p + 1) % media.length),
+      loopMs
     );
     return () => clearInterval(id);
-  }, []);
+  }, [loopMs, media.length]);
 
   // per-card: clip-wipe the new image in, Ken-Burns the photo, run the progress bar
   useEffect(() => {
@@ -47,20 +40,20 @@ export default function HeroCards() {
       gsap.fromTo(
         img.current,
         { scale: 1.18, xPercent: -3 },
-        { scale: 1, xPercent: 3, duration: LOOP_MS / 1000, ease: "none" }
+        { scale: 1, xPercent: 3, duration: loopMs / 1000, ease: "none" }
       );
     }
     if (bar.current) {
       gsap.fromTo(
         bar.current,
         { scaleX: 0 },
-        { scaleX: 1, duration: LOOP_MS / 1000, ease: "none" }
+        { scaleX: 1, duration: loopMs / 1000, ease: "none" }
       );
     }
-  }, [i]);
+  }, [i, loopMs]);
 
-  const cur = MEDIA[i];
-  const nextImg = MEDIA[(i + 1) % MEDIA.length].img;
+  const cur = media[i] ?? media[0];
+  const nextImg = media[(i + 1) % media.length]?.img ?? cur.img;
 
   return (
     <div className="relative h-full w-full">
@@ -111,3 +104,4 @@ export default function HeroCards() {
     </div>
   );
 }
+

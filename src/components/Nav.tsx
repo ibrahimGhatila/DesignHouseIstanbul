@@ -3,19 +3,17 @@
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, registerGsap } from "@/lib/gsap";
+import { defaultDesignHouseContent, type DesignHouseContent } from "@/lib/cms/designHouseContent";
 
-const LINKS = [
-  ["Expertise", "#expertise"],
-  ["Clients", "#clients"],
-  ["Studio", "#studio"],
-  ["News", "#news"],
-  ["Contact", "#contact"],
-];
+type Props = {
+  content?: DesignHouseContent["nav"];
+};
 
-export default function Nav() {
+export default function Nav({ content = defaultDesignHouseContent.nav }: Props) {
   const [open, setOpen] = useState(false);
   const overlay = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const links = content.links.length ? content.links : defaultDesignHouseContent.nav.links;
 
   useGSAP(
     () => {
@@ -51,14 +49,14 @@ export default function Nav() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
         <a
-          href="#top"
+          href={content.logo_href}
           className="font-display text-lg font-extrabold uppercase tracking-tight text-white"
         >
-          Design House<span className="text-acid">.</span>
+          {content.logo_label}<span className="text-acid">.</span>
         </a>
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-base font-medium text-white md:flex">
-          {LINKS.slice(0, 4).map(([label, href]) => (
+          {links.slice(0, 4).map(({ label, href }) => (
             <a key={label} href={href} className="link-wipe">
               {label}
             </a>
@@ -67,17 +65,17 @@ export default function Nav() {
 
         <div className="flex items-center gap-5">
           <a
-            href="#contact"
+            href={content.contact_href}
             className="hidden rounded-[3px] border border-white px-5 py-2 text-sm uppercase italic text-white transition-colors hover:bg-white hover:text-ink md:inline-block"
           >
-            Contact
+            {content.contact_label}
           </a>
           <button
             onClick={toggle}
             className="font-mono text-xs uppercase tracking-[0.2em] text-white md:hidden"
             aria-expanded={open}
           >
-            {open ? "Close" : "Menu"}
+            {open ? content.menu_close_label : content.menu_open_label}
           </button>
         </div>
       </header>
@@ -88,7 +86,7 @@ export default function Nav() {
         className="fixed inset-0 z-40 flex -translate-y-full flex-col justify-between bg-acid px-5 pb-10 pt-28 text-ink md:px-10"
       >
         <nav className="flex flex-col">
-          {LINKS.map(([label, href]) => (
+          {links.map(({ label, href }) => (
             <div key={label} className="overflow-hidden">
               <a
                 href={href}
@@ -102,22 +100,19 @@ export default function Nav() {
         </nav>
 
         <div className="menu-meta flex flex-col gap-6 font-mono text-xs uppercase tracking-[0.15em] opacity-0 md:flex-row md:items-end md:justify-between">
-          <a href="#contact" onClick={toggle} className="underline">
-            New business inquiries →
+          <a href={content.inquiry_href} onClick={toggle} className="underline">
+            {content.inquiry_label}
           </a>
           <div className="flex gap-6">
-            <a href="#" className="hover:opacity-60">
-              LinkedIn
-            </a>
-            <a href="#" className="hover:opacity-60">
-              Instagram
-            </a>
-            <a href="#" className="hover:opacity-60">
-              Behance
-            </a>
+            {content.social.map((item) => (
+              <a key={item.label} href={item.href} className="hover:opacity-60">
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
 }
+

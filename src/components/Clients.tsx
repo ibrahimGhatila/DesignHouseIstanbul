@@ -2,30 +2,14 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
+import { gsap, registerGsap } from "@/lib/gsap";
+import { defaultDesignHouseContent, type DesignHouseContent } from "@/lib/cms/designHouseContent";
 
-// Each row = a school on the left and right of a centre channel. As you scroll
-// the two sides slide in and "come together", row by row, top to bottom.
-const ROWS: [string, string][] = [
-  ["Central Saint Martins", "IED Milano"],
-  ["Royal College of Art", "NABA Milano"],
-  ["Parsons School of Design", "Domus Academy"],
-  ["Rhode Island School of Design", "Konstfack"],
-  ["Politecnico di Milano", "UMPRUM Prague"],
-  ["Pratt Institute", "Sandberg Instituut"],
-  ["University of the Arts London", "SCAD"],
-  ["ArtCenter College of Design", "CalArts"],
-  ["Aalto University", "School of Visual Arts"],
-  ["Design Academy Eindhoven", "Cooper Union"],
-  ["Glasgow School of Art", "OCAD University"],
-  ["Bezalel Academy", "Emily Carr"],
-  ["Goldsmiths, London", "Musashino Art University"],
-  ["ECAL Lausanne", "Tama Art University"],
-  ["HEAD Genève", "RMIT"],
-  ["Gerrit Rietveld Academie", "ELISAVA Barcelona"],
-];
+type Props = {
+  content?: DesignHouseContent["clients"];
+};
 
-export default function Clients() {
+export default function Clients({ content = defaultDesignHouseContent.clients }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -69,20 +53,20 @@ export default function Clients() {
       className="relative overflow-hidden bg-paper py-24 text-ink md:py-32"
     >
       <div className="mx-auto mb-14 flex max-w-6xl items-center justify-between px-5 t-kicker text-ink/50 md:px-10">
-        <span>( Where our students get in )</span>
-        <span>01</span>
+        <span>{content.kicker}</span>
+        <span>{content.index}</span>
       </div>
 
       <div className="relative mx-auto max-w-6xl px-5 md:px-10">
         {/* giant title */}
         <h2 className="clients-title mb-12 text-center font-display text-[14vw] uppercase leading-[0.85] md:mb-20 md:text-[8vw]">
-          Destinations
+          {content.title}
         </h2>
 
         <div className="flex flex-col font-mono text-sm leading-none md:text-lg">
-          {ROWS.map(([l, r], i) => (
+          {content.rows.map(([l, r], i) => (
             <div
-              key={i}
+              key={`${l}-${r}-${i}`}
               className="client-row grid grid-cols-2 gap-8 py-2 md:gap-24"
             >
               <span className="cell-l text-right">{l}</span>
@@ -94,3 +78,4 @@ export default function Clients() {
     </section>
   );
 }
+

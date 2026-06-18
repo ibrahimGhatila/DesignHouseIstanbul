@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap";
+import { gsap, registerGsap } from "@/lib/gsap";
 import { IMAGES } from "@/lib/images";
 
 const PROJECTS = [
